@@ -23,9 +23,15 @@ export function activate(context: vscode.ExtensionContext) {
 		let extensionsJSPath = join(alExtensionBasePath, '/dist/extension.js');
 		let fileContent = readFileSync(extensionsJSPath, 'utf8');
 		//const n=["/startDebugging"];for(const e of c.getLanguageServerOptions())n.push(e);n.push("/projectRoot:"+t.uri.fsPath);const i=this.getServerPath()
+		//const n=["/startDebugging"];for(const e of u.getLanguageServerOptions())n.push(e);n.push("/projectRoot:"+t.uri.fsPath);const i=this.getServerPath()
 		//const n=["/home/stefan/.vscode/extensions/ms-dynamics-smb.al-11.0.787898/bin/win32/Microsoft.Dynamics.Nav.EditorServices.Host.dll","/startDebugging"];for(const e of c.getLanguageServerOptions())n.push(e);n.push("/projectRoot:"+t.uri.fsPath);const i="/bin/dotnet"
 		let newfileContent = fileContent.replace(
 			'const n=["/startDebugging"];for(const e of c.getLanguageServerOptions())n.push(e);n.push("/projectRoot:"+t.uri.fsPath);const i=this.getServerPath()',
+			`const n=["${join(alExtensionBasePath,'/bin/win32/Microsoft.Dynamics.Nav.EditorServices.Host.dll')}","/startDebugging"];for(const e of c.getLanguageServerOptions())n.push(e);n.push("/projectRoot:"+t.uri.fsPath);const i="${dotnetPath}"`
+		);
+		//AL Language v12
+		newfileContent = fileContent.replace(
+			'const n=["/startDebugging"];for(const e of u.getLanguageServerOptions())n.push(e);n.push("/projectRoot:"+t.uri.fsPath);const i=this.getServerPath()',
 			`const n=["${join(alExtensionBasePath,'/bin/win32/Microsoft.Dynamics.Nav.EditorServices.Host.dll')}","/startDebugging"];for(const e of c.getLanguageServerOptions())n.push(e);n.push("/projectRoot:"+t.uri.fsPath);const i="${dotnetPath}"`
 		);
 		//const e=[];for(const t of y.getLanguageServerOptions())e.push(t);e.push(`/sessionId:${this.sessionId}`);const t=this.getServerPath()
