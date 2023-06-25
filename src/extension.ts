@@ -25,13 +25,13 @@ export function activate(context: vscode.ExtensionContext) {
 		//"/startDebugging"
 		//"/home/stefan/.vscode/extensions/ms-dynamics-smb.al-11.0.787898/bin/win32/Microsoft.Dynamics.Nav.EditorServices.Host.dll","/startDebugging"
 		let newfileContent = fileContent.replace(
-			'"/startDebugging"',
+			/"\/startDebugging"/g,
 			`"${join(alExtensionBasePath,'/bin/win32/Microsoft.Dynamics.Nav.EditorServices.Host.dll')}","/startDebugging"`
 		);
 		//this.getServerPath()
 		//"/bin/dotnet"
 		newfileContent = fileContent.replace(
-			'this.getServerPath()',
+			/this\.getServerPath\(\)/g,
 			`"${dotnetPath}"`
 		);
 		//const e=[];for(const t of y.getLanguageServerOptions())
