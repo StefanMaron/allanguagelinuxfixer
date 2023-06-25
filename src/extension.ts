@@ -22,23 +22,23 @@ export function activate(context: vscode.ExtensionContext) {
 		
 		let extensionsJSPath = join(alExtensionBasePath, '/dist/extension.js');
 		let fileContent = readFileSync(extensionsJSPath, 'utf8');
-		//const n=["/startDebugging"];for(const e of c.getLanguageServerOptions())n.push(e);n.push("/projectRoot:"+t.uri.fsPath);const i=this.getServerPath()
-		//const n=["/startDebugging"];for(const e of u.getLanguageServerOptions())n.push(e);n.push("/projectRoot:"+t.uri.fsPath);const i=this.getServerPath()
-		//const n=["/home/stefan/.vscode/extensions/ms-dynamics-smb.al-11.0.787898/bin/win32/Microsoft.Dynamics.Nav.EditorServices.Host.dll","/startDebugging"];for(const e of c.getLanguageServerOptions())n.push(e);n.push("/projectRoot:"+t.uri.fsPath);const i="/bin/dotnet"
+		//"/startDebugging"
+		//"/home/stefan/.vscode/extensions/ms-dynamics-smb.al-11.0.787898/bin/win32/Microsoft.Dynamics.Nav.EditorServices.Host.dll","/startDebugging"
 		let newfileContent = fileContent.replace(
-			'const n=["/startDebugging"];for(const e of c.getLanguageServerOptions())n.push(e);n.push("/projectRoot:"+t.uri.fsPath);const i=this.getServerPath()',
-			`const n=["${join(alExtensionBasePath,'/bin/win32/Microsoft.Dynamics.Nav.EditorServices.Host.dll')}","/startDebugging"];for(const e of c.getLanguageServerOptions())n.push(e);n.push("/projectRoot:"+t.uri.fsPath);const i="${dotnetPath}"`
+			'"/startDebugging"',
+			`"${join(alExtensionBasePath,'/bin/win32/Microsoft.Dynamics.Nav.EditorServices.Host.dll')}","/startDebugging"`
 		);
-		//AL Language v12
+		//this.getServerPath()
+		//"/bin/dotnet"
 		newfileContent = fileContent.replace(
-			'const n=["/startDebugging"];for(const e of u.getLanguageServerOptions())n.push(e);n.push("/projectRoot:"+t.uri.fsPath);const i=this.getServerPath()',
-			`const n=["${join(alExtensionBasePath,'/bin/win32/Microsoft.Dynamics.Nav.EditorServices.Host.dll')}","/startDebugging"];for(const e of c.getLanguageServerOptions())n.push(e);n.push("/projectRoot:"+t.uri.fsPath);const i="${dotnetPath}"`
+			'this.getServerPath()',
+			`"${dotnetPath}"`
 		);
-		//const e=[];for(const t of y.getLanguageServerOptions())e.push(t);e.push(`/sessionId:${this.sessionId}`);const t=this.getServerPath()
-		//const e=["/home/stefan/.vscode/extensions/ms-dynamics-smb.al-11.0.787898/bin/win32/Microsoft.Dynamics.Nav.EditorServices.Host.dll"];for(const t of y.getLanguageServerOptions())e.push(t);e.push(`/sessionId:${this.sessionId}`);const t="/bin/dotnet"
+		//const e=[];for(const t of y.getLanguageServerOptions())
+		//const e=["/home/stefan/.vscode/extensions/ms-dynamics-smb.al-11.0.787898/bin/win32/Microsoft.Dynamics.Nav.EditorServices.Host.dll"];for(const t of y.getLanguageServerOptions())
 		newfileContent = newfileContent.replace(
-			'const e=[];for(const t of y.getLanguageServerOptions())e.push(t);e.push(`/sessionId:${this.sessionId}`);const t=this.getServerPath()',
-			`const e=["${join(alExtensionBasePath,'/bin/win32/Microsoft.Dynamics.Nav.EditorServices.Host.dll')}"];for(const t of y.getLanguageServerOptions())e.push(t);e.push(\`/sessionId:\${this.sessionId}\`);const t="${dotnetPath}"`
+			'const e=[];for(const t of y.getLanguageServerOptions())',
+			`const e=["${join(alExtensionBasePath,'/bin/win32/Microsoft.Dynamics.Nav.EditorServices.Host.dll')}"];for(const t of y.getLanguageServerOptions())`
 		);
 		writeFileSync(extensionsJSPath, newfileContent, 'utf8');
 
