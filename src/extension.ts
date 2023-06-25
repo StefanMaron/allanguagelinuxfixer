@@ -30,7 +30,7 @@ export function activate(context: vscode.ExtensionContext) {
 		);
 		//this.getServerPath()
 		//"/bin/dotnet"
-		newfileContent = fileContent.replace(
+		newfileContent = newfileContent.replace(
 			/this\.getServerPath\(\)/g,
 			`"${dotnetPath}"`
 		);
